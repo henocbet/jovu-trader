@@ -1,0 +1,30 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DB_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Connection {
+  id             String                @id @default(cuid())
+  createdAt      DateTime              @default(now())
+  updatedAt      DateTime              @updatedAt
+  connectionName String?
+  details        Json?
+  status         EnumConnectionStatus?
+}
+
+model Platform {
+  id           String   @id @default(cuid())
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  platformName String?
+  apiUrl       String?
+  apiKey       String?
+}
+
+enum EnumConnectionStatus {
+  Option1
+}
