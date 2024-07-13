@@ -1,0 +1,29 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DB_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Trade {
+  id           String           @id @default(cuid())
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+  tradeId      String?
+  tradeDetails Json?
+  status       EnumTradeStatus?
+}
+
+model TradeLog {
+  id         String    @id @default(cuid())
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  logDetails Json?
+  timestamp  DateTime?
+}
+
+enum EnumTradeStatus {
+  Option1
+}
